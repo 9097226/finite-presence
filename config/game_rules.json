@@ -1,0 +1,36 @@
+{
+  "project": "Finite Presence",
+  "version": "0.1.1",
+  "presence": {
+    "rest_mode_enabled": true,
+    "force_disconnect": false,
+    "daily_minutes": 45,
+    "banking_enabled": false
+  },
+  "space": {
+    "commons_always_public": true,
+    "fail_closed": true,
+    "levels": [
+      "L0_COMMONS",
+      "L1_THRESHOLD",
+      "L2_GUEST",
+      "L3_TRUSTED",
+      "L4_INTIMATE",
+      "L5_SELF"
+    ]
+  },
+  "social": {
+    "daily_login_rewards": false,
+    "streak_rewards": false,
+    "relationship_score_visible": false,
+    "short_messages_enabled": true,
+    "short_message_max_chars": 100,
+    "silent_copresence_supported": true
+  },
+  "governance": {
+    "public_access_unlimited_mutation": false,
+    "explicit_denial_overrides_allow": true,
+    "permissions_revocable": true,
+    "audit_access_decisions": true
+  }
+}
