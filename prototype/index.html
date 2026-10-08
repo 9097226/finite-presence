@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finite Presence — MVP Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">FINITE PRESENCE / 有限存在</p>
+        <h1>世界一直都在，而你不能一直都在。</h1>
+        <p class="lead">把今天有限的时间，留给自己、某个人，还是这个世界？</p>
+      </div>
+      <div class="session-card">
+        <span>今日有效存在</span>
+        <strong id="timeRemaining">45</strong>
+        <small>分钟</small>
+        <div class="progress"><i id="timeBar"></i></div>
+        <button id="restButton" class="ghost">进入静默时间</button>
+      </div>
+    </header>
+
+    <section class="panel controls">
+      <div>
+        <h2>45 分钟有限存在</h2>
+        <p>每个自然日只有 45 分钟有效存在时间。它不是难度选项，而是这个世界的基本规则：时间有限，所以选择具有重量。</p>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <article class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">CHOICE</p>
+            <h2>今晚把时间留给什么？</h2>
+          </div>
+          <span id="modeBadge" class="badge">ACTIVE</span>
+        </div>
+        <div class="action-grid" id="actions"></div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">MEMORY</p>
+        <h2>今晚留下的生活记录</h2>
+        <div id="memoryLog" class="log empty">还没有发生什么。你不需要把今晚填满。</div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">PRIVACY GRADIENT</p>
+          <h2>家不是一道门，而是一系列边界</h2>
+          <p>权限从外向内逐渐收紧。公共领域永远存在，屋主无法关闭。</p>
+        </div>
+        <select id="privacyPreset" aria-label="隐私模板">
+          <option value="open">开放</option>
+          <option value="friendly" selected>友好</option>
+          <option value="quiet">安静</option>
+          <option value="private">私人</option>
+        </select>
+      </div>
+
+      <div class="zones" id="zones"></div>
+
+      <div class="visitor-test">
+        <div>
+          <h3>访问模拟</h3>
+          <p>测试不同关系的人能走到哪里。显式拒绝优先，未知权限默认关闭。</p>
+        </div>
+        <div class="visitor-controls">
+          <select id="visitorType">
+            <option value="stranger">陌生人</option>
+            <option value="friend">好友</option>
+            <option value="named">指定对象：林</option>
+          </select>
+          <button id="simulateVisit">模拟来访</button>
+        </div>
+      </div>
+      <div id="visitResult" class="visit-result">尚未模拟访问。</div>
+    </section>
+
+    <section class="grid two">
+      <article class="panel commons-panel">
+        <p class="eyebrow">COMMONS</p>
+        <h2>门外的公共领域</h2>
+        <p>即使你的住宅完全关闭，这里仍然属于所有人。别人可以存在，但不能侵入你的私人空间。</p>
+        <div id="commonsScene" class="commons-scene">
+          <div class="house">⌂</div>
+          <div class="bench">▱</div>
+          <div class="tree">♧</div>
+          <div class="traveler" id="traveler">•</div>
+        </div>
+        <div class="commons-actions">
+          <button data-common="sit">在长椅坐一会 · 3 分钟</button>
+          <button data-common="note">留下短留言 · 2 分钟</button>
+          <button data-common="lamp">点亮公共灯 · 4 分钟</button>
+        </div>
+      </article>
+
+      <article class="panel">
+        <p class="eyebrow">TRACE</p>
+        <h2>世界痕迹</h2>
+        <div id="traceLog" class="trace-list">
+          <div class="trace">公共长椅今天有人坐过。</div>
+          <div class="trace">门外的树仍然在那里。</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel experiment">
+      <p class="eyebrow">EXPERIMENT CHECK</p>
+      <h2>结束一次原型会话时，只问这四个问题</h2>
+      <div class="questions">
+        <label><input type="checkbox" /> 我刚才做过至少一次真实取舍，而不是按奖励大小选。</label>
+        <label><input type="checkbox" /> 我愿意在没有数值奖励时做一次拜访、等待或留痕。</label>
+        <label><input type="checkbox" /> 我能理解“谁可以进入哪里”代表不同程度的信任。</label>
+        <label><input type="checkbox" /> 即使不开放住宅，公共区域仍让我感觉世界里有人。</label>
+      </div>
+    </section>
+
+    <footer>
+      <span>Prototype v0.1.1</span>
+      <span>Presence → Choice → Action → Trace → Memory</span>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
