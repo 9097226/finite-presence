@@ -169,6 +169,7 @@ http://localhost:8000
 ```text
 finite-presence-game/
 ├─ README.md
+├─ LICENSE
 ├─ docs/
 │  ├─ 00-vision.md
 │  ├─ 01-design-principles.md
@@ -205,4 +206,10 @@ finite-presence-game/
 
 ## 12. 许可
 
-本仓库当前**未附加开源许可证**。在公开发布前，应明确选择 MIT、Apache-2.0、GPL 或保留全部权利。未添加许可证不等于自动开源授权。
+本仓库整体采用 **CC0 1.0 Universal 公共领域奉献**，适用于本项目的代码、文档、设计说明、概念材料及其他原创内容。完整法律文本见 [LICENSE](LICENSE)，官方说明见 [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)。
+
+任何人均可复制、修改、分发、翻译、整合及商业使用这些内容，**无需署名、无需另行申请许可、无需支付许可费用**。
+
+项目权利人在法律允许的最大范围内，永久、不可撤销、无条件地放弃本仓库内容的著作权及相关权利；若部分权利放弃在当地法律下无效，则适用 CC0 的公共许可后备条款。
+
+CC0 不影响商标或专利权，也不能代为处置第三方权利。内容按现状提供，不作任何保证。以上为许可摘要，具体条款以 LICENSE 中的 CC0 1.0 Universal 全文为准。

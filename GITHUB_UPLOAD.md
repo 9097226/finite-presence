@@ -35,6 +35,6 @@ python -m http.server 8000
 ## 公开前建议
 
 1. 先决定是否公开仓库；概念尚处于早期，公开会暴露完整设计思路。
-2. 明确 LICENSE。当前仓库故意没有开源许可证。
+2. 许可已明确：整个仓库采用 CC0 1.0 Universal 公共领域奉献，完整条款见 LICENSE，许可摘要见 README。
 3. 首轮原型测试建议先用 Private Repository。
 4. 不要先扩充大量功能；优先用 GitHub Issues 记录实验和证据。
