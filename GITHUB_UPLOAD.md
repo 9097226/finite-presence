@@ -27,14 +27,13 @@ git push -u origin main
 
 ```bash
 cd prototype
-python -m http.server 8000
+python -m http.server 18451 --bind 127.0.0.1
 ```
 
-访问 `http://localhost:8000`。
+访问 `http://127.0.0.1:18451/`。
 
-## 公开前建议
+## 当前公开仓库
 
-1. 先决定是否公开仓库；概念尚处于早期，公开会暴露完整设计思路。
-2. 许可已明确：整个仓库采用 CC0 1.0 Universal 公共领域奉献，完整条款见 LICENSE，许可摘要见 README。
-3. 首轮原型测试建议先用 Private Repository。
-4. 不要先扩充大量功能；优先用 GitHub Issues 记录实验和证据。
+项目已公开在 https://github.com/9097226/finite-presence 。整个仓库采用 CC0 1.0 Universal，条款见 LICENSE。
+
+后续变更通过正常 Git 提交与推送同步；不包含浏览器个人存档、日志或本机运行状态。试玩方式与验证命令以 README 为准。

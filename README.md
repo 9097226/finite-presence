@@ -25,10 +25,12 @@ Finite Presence 是一个“永久世界 + 有限存在时间 + 分层私人空�
 
 ## 1. 当前状态
 
-- 阶段：`Concept + MVP Prototype`
-- 版本：`v0.1.1`
+- 阶段：`Concept + Illustrated Room Prototype`
+- 版本：`v0.3.0-alpha.1`
 - 目标：验证核心体验，不追求完整游戏内容
-- 可运行：是（浏览器静态原型，无外部依赖）
+- 可运行：是（浏览器静态原型，只需静态 HTTP 服务）
+- 当前实现：一间错层树屋、公共门廊、模拟来访、真实计时与本机存档
+- 范围：人物采用姿态图片切换，尚无真人联网或持久化后端
 - 推荐下一阶段：用户测试 → 决策指标 → 引擎原型（Godot / Unity）
 
 ## 2. 项目核心
@@ -112,7 +114,9 @@ flowchart LR
 
 项目固定采用：
 
-- **45 分钟 / 日的有效存在时间**
+- **45 分钟 / 日的有效存在时间，按真实经过的秒数结算**
+- 点击行为不扣除预设分钟；后台仍计时，静默或关闭后停止有效计时
+- 刷新不重置同日额度；按本机当地自然日零点更新
 
 45 分钟不是可选难度或实验档位，而是当前项目的核心设计约束。
 
@@ -142,58 +146,68 @@ flowchart LR
 
 ## 9. 运行浏览器原型
 
-无需安装依赖：
+在仓库根目录运行（Python 3 标准库即可）：
 
 ```bash
-cd prototype
-python -m http.server 8000
+python -m http.server 18451 --bind 127.0.0.1 --directory prototype
 ```
 
-浏览器访问：
+浏览器打开 [http://127.0.0.1:18451/](http://127.0.0.1:18451/)。无需账号、API 密钥或额外运行依赖。
 
-```text
-http://localhost:8000
+![树屋原型的阅读状态](docs/verification/room.png)
+
+点“进屋，待一会”，然后直接点击书、茶桌、床、灯或门；也可用 Tab 与回车操作。行为持续真实发生，可随时结束。来访者必须获邀才能进入楼下会客区，楼上仍是私人空间。
+
+当前原型可以体验：
+
+- 真实的每日 45 分钟计时，暂停/恢复与同日额度保存；
+- 读书、喝茶、休息，以及相应人物姿态和实际时长记录；
+- 门外公共小路、邀请、拒绝、赠茶、签收与回信；
+- 本机私人日记、生活记录、来访许可和行为进度保存；
+- 图片加载失败时自动暂停、保留旧画面与重试。
+
+邻居与回信是本地模拟；人物尚非完整动画。存档属于当前浏览器与页面地址，清除站点数据或换浏览器不会保留同一存档。本机日期及前端存储不是防作弊的服务端权威系统。
+
+详见 [试玩说明](LOCAL_TRIAL.md)、[项目状态](PROJECT_STATUS.md) 与 [验证记录](design-qa.md)。技术检查通过不等同于核心体验已获真实用户验证。
+
+### 验证
+
+测试需要 Python 3 和 Node.js 24：
+
+```bash
+python scripts/validate_config.py
+python -m unittest discover -s tests -v
+node --check prototype/app.js
+node --check prototype/home-model.js
+node tests/test_home_model.cjs
+node tests/test_home_asset_recovery.cjs
 ```
 
-原型当前用于体验：
-
-- 固定 45 分钟有效存在预算；
-- 在“独处、拜访、公共领域、建设”之间分配时间；
-- 配置住宅各层访问权限；
-- 模拟陌生人、好友与指定对象的访问结果；
-- 查看公共领域事件和永久痕迹；
-- 观察一次会话结束后生成的“生活记录”。
+当前结果：6 项配置测试、17 项真实计时/状态测试、4 项图片故障恢复测试通过。浏览器已验证主要操作链、保存、暂停、访问边界、故障重试与画面对照；未实等完整 45 分钟，耗尽与跨日通过隔离时间模型验证。
 
 ## 10. 仓库结构
 
 ```text
-finite-presence-game/
+finite-presence/
 ├─ README.md
 ├─ LICENSE
-├─ docs/
-│  ├─ 00-vision.md
-│  ├─ 01-design-principles.md
-│  ├─ 02-core-loop.md
-│  ├─ 03-social-spatial-model.md
-│  ├─ 04-time-model.md
-│  ├─ 05-mvp-prd.md
-│  ├─ 06-domain-model.md
-│  ├─ 07-telemetry-and-evaluation.md
-│  ├─ 08-risks-and-governance.md
-│  └─ 09-roadmap.md
+├─ LOCAL_TRIAL.md
+├─ PROJECT_STATUS.md
+├─ design-qa.md
+├─ docs/                 # 原构想、规则、PRD 与验证截图
 ├─ prototype/
 │  ├─ index.html
 │  ├─ styles.css
-│  └─ app.js
-├─ config/
-│  └─ game_rules.json
-├─ scripts/
-│  └─ validate_config.py
+│  ├─ app.js
+│  ├─ home-model.js       # 真实计时、行为与来访状态
+│  └─ assets/             # 原创树屋姿态与门外插画
+├─ config/game_rules.json
+├─ scripts/validate_config.py
 ├─ tests/
-│  └─ test_game_rules.py
-└─ .github/
-   ├─ workflows/ci.yml
-   └─ ISSUE_TEMPLATE/
+│  ├─ test_game_rules.py
+│  ├─ test_home_model.cjs
+│  └─ test_home_asset_recovery.cjs
+└─ .github/workflows/ci.yml
 ```
 
 ## 11. 当前最重要的产品判断
